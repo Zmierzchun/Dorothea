@@ -1,0 +1,29 @@
+AppBundle\Entity\Menu:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\MenuRepository
+    gedmo:
+      translation:
+          locale: locale
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: integer
+            unique: true
+            gedmo:
+                - translatable
+
+    oneToMany:
+        items:
+            targetEntity: MenuItem
+            mappedBy: parentMenu
+            cascade:
+                - remove
+            orphanRemoval: true
+
+    lifecycleCallbacks: {  }

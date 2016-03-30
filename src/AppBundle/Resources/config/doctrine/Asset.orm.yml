@@ -1,0 +1,61 @@
+AppBundle\Entity\Asset:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\AssetRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            type: string
+            length: 255
+        description:
+            type: text
+            length: 255
+        link:
+            type: string
+            length: 255
+        enabled:
+            type: boolean
+        created:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        modified:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update
+        published:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update
+                    field:
+                        - enabled
+
+    indexes:
+        search_idx:
+            columns: title
+
+    oneToMany:
+        children:
+            targetEntity: Asset
+            mappedBy: parent
+        contentType:
+            targetEntity: ContentType
+            mappedBy: assets
+    manyToOne:
+        parent:
+            targetEntity: Asset
+            inversedBy: children
+    manyToMany:
+        tags:
+            targetEntity: Tag
+            inversedBy: assets
+
+    lifecycleCallbacks: {  }

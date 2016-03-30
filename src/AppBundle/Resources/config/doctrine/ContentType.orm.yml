@@ -1,0 +1,29 @@
+AppBundle\Entity\ContentType:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\ContentTypeRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: '64'
+            unique: true
+    manyToOne:
+        articles:
+            targetEntity: Article
+            inversedBy: contentType
+            joinColumn:
+                name: contentType_id
+                referencedColumnName: id
+        assets:
+            targetEntity: Asset
+            inversedBy: contentType
+            joinColumn:
+                name: contentType_id
+                referencedColumnName: id
+    lifecycleCallbacks: {  }

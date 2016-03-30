@@ -1,0 +1,39 @@
+AppBundle\Entity\Tag:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\TagRepository
+    gedmo:
+        translation:
+            locale: locale
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: '128'
+            unique: true
+            gedmo:
+                - translatable
+        description:
+            type: text
+            nullable: true
+            gedmo:
+                - translatable
+#relations
+    manyToMany:
+        articles:
+            targetEntity: Article
+            mappedBy: tags
+        assets:
+            targetEntity: Asset
+            mappedBy: tags
+#indexes
+    indexes:
+        search_idx:
+            columns: name
+
+    lifecycleCallbacks: {  }

@@ -1,0 +1,83 @@
+AppBundle\Entity\Article:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\ArticleRepository
+    gedmo:
+        translation:
+            locale: locale
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            type: string
+            length: 255
+            nullable: false
+            gedmo:
+                - translatable
+        description:
+            type: text
+            nullable: false
+            gedmo:
+                - translatable
+        content:
+            type: text
+            nullable: false
+            gedmo:
+                - translatable
+
+        enabled:
+            type: boolean
+            nullable: false
+            default: "false"
+
+        slug:
+            type: string
+            length: 255
+            unique: true
+            gedmo:
+                slug:
+                    separator: _
+                    style: camel
+                    fields:
+                      - title
+        created:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        modified:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update
+        published:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update
+                    field:
+                        - enabled
+    indexes:
+        search_idx:
+            columns: slug
+    oneToMany:
+        children:
+            targetEntity: Article
+            mappedBy: parent
+        contentType:
+            targetEntity: ContentType
+            mappedBy: articles
+    manyToOne:
+        parent:
+            targetEntity: Article
+            inversedBy: children
+    manyToMany:
+        tags:
+            targetEntity: Tag
+            inversedBy: article
+
+    lifecycleCallbacks: {  }

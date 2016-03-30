@@ -1,0 +1,37 @@
+AppBundle\Entity\MenuItem:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\MenuItemRepository
+    gedmo:
+        translation:
+            locale: locale
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: '128'
+            gedmo:
+                - translatable
+        link:
+            type: string
+            length: 255
+        icon:
+            type: string
+            length: 255
+        orderNo:
+            type: integer
+        enabled:
+            type: boolean
+
+    ManyToOne:
+        parentMenu:
+            targetEntity: Menu
+            inversedBy: Items
+
+    lifecycleCallbacks: {  }
+
