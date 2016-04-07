@@ -1,0 +1,16 @@
+{% extends "default/index.html.twig" %}
+
+{% block title %} {{ key }} {% endblock %}
+
+
+
+{% block content %}
+    {% for article in list %}
+         <div class="articleList">
+             <h3 class="articleListTitle">
+                 <a href="{{ path('_getArticleBySlug', {'slug': article.slug}) }}">{{ article.title }}</a>
+             </h3>
+             <cite class="articleListDescription">{{ article.description }}</cite>
+         </div>
+    {% endfor %}
+{% endblock %}

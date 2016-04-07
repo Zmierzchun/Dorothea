@@ -78,6 +78,6 @@ AppBundle\Entity\Article:
     manyToMany:
         tags:
             targetEntity: Tag
-            inversedBy: article
+            inversedBy: articles
 
     lifecycleCallbacks: {  }

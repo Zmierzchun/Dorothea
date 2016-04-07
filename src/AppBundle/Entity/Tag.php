@@ -35,12 +35,21 @@ class Tag
     private $assets;
 
     /**
+     * @var locale
+     */
+    private $locale;
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->articles = new \Doctrine\Common\Collections\ArrayCollection();
         $this->assets = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 
     /**
