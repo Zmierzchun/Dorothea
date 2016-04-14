@@ -409,4 +409,106 @@ class Article
     {
         return $this->published;
     }
+
+    /**
+     * Set contentType
+     *
+     * @param \AppBundle\Entity\ContentType $contentType
+     * @return Article
+     */
+    public function setContentType(\AppBundle\Entity\ContentType $contentType = null)
+    {
+        $this->contentType = $contentType;
+
+        return $this;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $translations;
+
+    /**
+     * @var \AppBundle\Entity\Article
+     */
+    private $original;
+
+
+    /**
+     * Set locale
+     *
+     * @param string $locale
+     * @return Article
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
+
+        return $this;
+    }
+
+    /**
+     * Get locale
+     *
+     * @return string 
+     */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+
+    /**
+     * Add translations
+     *
+     * @param \AppBundle\Entity\Article $translations
+     * @return Article
+     */
+    public function addTranslation(\AppBundle\Entity\Article $translations)
+    {
+        $this->translations[] = $translations;
+
+        return $this;
+    }
+
+    /**
+     * Remove translations
+     *
+     * @param \AppBundle\Entity\Article $translations
+     */
+    public function removeTranslation(\AppBundle\Entity\Article $translations)
+    {
+        $this->translations->removeElement($translations);
+    }
+
+    /**
+     * Get translations
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTranslations()
+    {
+        return $this->translations;
+    }
+
+    /**
+     * Set original
+     *
+     * @param \AppBundle\Entity\Article $original
+     * @return Article
+     */
+    public function setOriginal(\AppBundle\Entity\Article $original = null)
+    {
+        $this->original = $original;
+
+        return $this;
+    }
+
+    /**
+     * Get original
+     *
+     * @return \AppBundle\Entity\Article 
+     */
+    public function getOriginal()
+    {
+        return $this->original;
+    }
 }

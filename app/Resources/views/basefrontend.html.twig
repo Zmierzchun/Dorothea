@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="{#{{ locale }}#}">
     <head>
         <meta charset="UTF-8" />
-
+      {#<meta name="keywords" content=""/>
+        <meta name="author" content=" {{ author }}"/>
+        <meta name="description" content="{{ description }}"/>#}
 
         <title>{% block title %}{% endblock %}</title>
         {% block stylesheets %}{% endblock %}

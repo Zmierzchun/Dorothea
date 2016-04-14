@@ -2,9 +2,6 @@ AppBundle\Entity\MenuItem:
     type: entity
     table: null
     repositoryClass: AppBundle\Repository\MenuItemRepository
-    gedmo:
-        translation:
-            locale: locale
     id:
         id:
             type: integer
@@ -28,10 +25,32 @@ AppBundle\Entity\MenuItem:
         enabled:
             type: boolean
 
-    ManyToOne:
+    oneToMany:
+        translations:
+            targetEntity: AppBundle\Entity\MenuItem
+            mappedBy: original
+            cascade:
+                - remove
+            orphanRemoval: true
+
+    manyToOne:
         parentMenu:
-            targetEntity: Menu
-            inversedBy: Items
+            targetEntity: AppBundle\Entity\Menu
+            inversedBy: items
+            joinColumn:
+                name: parentMenu
+                referencedColumnName: id
+                nullable: false
+        original:
+            targetEntity: AppBundle\Entity\MenuItem
+            inversedBy: translations
+        locale:
+            targetEntity: AppBundle\Entity\Locale
+            inversedBy: menuItems
+            joinColumn:
+                name: locale
+                referencedColumnName: id
+                nullable: false
 
     lifecycleCallbacks: {  }
 

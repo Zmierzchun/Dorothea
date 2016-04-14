@@ -1,0 +1,52 @@
+AppBundle\Entity\Locale:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\LocaleRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+            nullable: false
+    fields:
+        name:
+            type: string
+            length: 8
+            unique: true
+            nullable: false
+        country:
+            type: string
+            length: 64
+            nullable: false
+        lang:
+            type: string
+            length: 64
+            nullable: false
+
+    indexes:
+        search_idx:
+            columns:
+              - lang
+              - name
+
+    oneToMany:
+        menus:
+            targetEntity: AppBundle\Entity\Menu
+            mappedBy: locale
+        menuItems:
+            targetEntity: AppBundle\Entity\MenuItem
+            mappedBy: locale
+        assets:
+            targetEntity: AppBundle\Entity\Asset
+            mappedBy: locale
+        articles:
+            targetEntity: AppBundle\Entity\Article
+            mappedBy: locale
+        tags:
+            targetEntity: AppBundle\Entity\Tag
+            mappedBy: locale
+        interfaceLabels:
+            targetEntity: AppBundle\Entity\InterfaceLabel
+            mappedBy: locale
+    lifecycleCallbacks: {  }

@@ -35,12 +35,21 @@ class Tag
     private $assets;
 
     /**
+     * @var locale
+     */
+    private $locale;
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->articles = new \Doctrine\Common\Collections\ArrayCollection();
         $this->assets = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 
     /**
@@ -163,5 +172,28 @@ class Tag
     public function getAssets()
     {
         return $this->assets;
+    }
+
+    /**
+     * Set locale
+     *
+     * @param \AppBundle\Entity\Locale $locale
+     * @return Tag
+     */
+    public function setLocale(\AppBundle\Entity\Locale $locale)
+    {
+        $this->locale = $locale;
+
+        return $this;
+    }
+
+    /**
+     * Get locale
+     *
+     * @return \AppBundle\Entity\Locale 
+     */
+    public function getLocale()
+    {
+        return $this->locale;
     }
 }

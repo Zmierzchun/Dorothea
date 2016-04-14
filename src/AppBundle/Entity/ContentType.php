@@ -108,4 +108,57 @@ class ContentType
     {
         return $this->assets;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->assets = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add assets
+     *
+     * @param \AppBundle\Entity\Asset $assets
+     * @return ContentType
+     */
+    public function addAsset(\AppBundle\Entity\Asset $assets)
+    {
+        $this->assets[] = $assets;
+
+        return $this;
+    }
+
+    /**
+     * Remove assets
+     *
+     * @param \AppBundle\Entity\Asset $assets
+     */
+    public function removeAsset(\AppBundle\Entity\Asset $assets)
+    {
+        $this->assets->removeElement($assets);
+    }
+
+    /**
+     * Add articles
+     *
+     * @param \AppBundle\Entity\Article $articles
+     * @return ContentType
+     */
+    public function addArticle(\AppBundle\Entity\Article $articles)
+    {
+        $this->articles[] = $articles;
+
+        return $this;
+    }
+
+    /**
+     * Remove articles
+     *
+     * @param \AppBundle\Entity\Article $articles
+     */
+    public function removeArticle(\AppBundle\Entity\Article $articles)
+    {
+        $this->articles->removeElement($articles);
+    }
 }

@@ -1,0 +1,33 @@
+{% extends "default/indexfrontend.html.twig" %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %}
+ <div class="article">
+     <h3 class="article_title">{{ title }}</h3>
+     <cite class="article_description">{{ description }}</cite>
+     <div class="article_content">
+         {{ content }}
+     </div>
+     <p class="article modification">Data ostatniej aktualizacji: {{ modified|date('Y-m-d')}}</p>
+     <ul class="article_tags"> Tagi
+         {% if tags %}
+            {% for tag in tags %}
+                <li><a class="tagLink" href="{{ path('_listArticlesByTag', {'tag': tag.name, 'locale': locale }) }}">{{ tag.name }}</a></li>
+            {% endfor %}
+         {% else %}
+            <li class="noTags" lang="pl">Nie przypisano żadnych tagów.</li>
+         {% endif %}
+     </ul>
+     <ul class="relatedArticles"> Powiązane artykuły
+     {% if children %}
+         {% for child in children %}
+             <li><a class="childLink" href="{{ path('_getArticleBySlug', {'slug': child.slug ,'locale': locale}) }}">{{ child.title }}</a></li>
+         {% endfor %}
+     {% else %}
+         <li class="noChildren" lang="pl">Nie ma powiązanych artykułów</li>
+     {% endif %}
+     </ul>
+ </div>
+
+{% endblock %}

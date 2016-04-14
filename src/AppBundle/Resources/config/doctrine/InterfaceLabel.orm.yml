@@ -1,7 +1,7 @@
-AppBundle\Entity\Menu:
+AppBundle\Entity\InterfaceLabel:
     type: entity
     table: null
-    repositoryClass: AppBundle\Repository\MenuRepository
+    repositoryClass: AppBundle\Repository\InterfaceLabelRepository
     id:
         id:
             type: integer
@@ -11,33 +11,30 @@ AppBundle\Entity\Menu:
     fields:
         name:
             type: string
-            length: 64
-            unique: true
+            length: 255
+            nullable: false
+
+        content:
+            type: text
             nullable: false
 
     oneToMany:
-        items:
-            targetEntity: AppBundle\Entity\MenuItem
-            mappedBy: parentMenu
-            cascade:
-                - remove
-            orphanRemoval: true
         translations:
-            targetEntity: AppBundle\Entity\Menu
+            targetEntity: AppBundle\Entity\InterfaceLabel
             mappedBy: original
             cascade:
                 - remove
             orphanRemoval: true
+
     manyToOne:
         original:
-            targetEntity: AppBundle\Entity\Menu
+            targetEntity: AppBundle\Entity\InterfaceLabel
             inversedBy: translations
         locale:
             targetEntity: AppBundle\Entity\Locale
-            inversedBy: menus
+            inversedBy: interfaceLabels
             joinColumn:
                 name: locale
                 referencedColumnName: id
                 nullable: false
-
     lifecycleCallbacks: {  }
