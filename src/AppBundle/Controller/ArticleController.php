@@ -10,15 +10,15 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class ArticleController extends Controller
 {
     /**
-     * @Route("/article/{id}", requirements={"id": "\d+"}, name="_getArticleById")
+     * @Route("{locale}/article/{id}", requirements={"id": "\d+"}, name="_getArticleById")
      *
      */
-    public function getArticleByIdAction($id)
+    public function getArticleByIdAction($id, $locale)
     {
-        return $this->render('AppBundle:Article:show_article.html.twig', $this->showArticle(array('id' => $id)));
+        return $this->render('AppBundle:Article:show_article.html.twig', $this->showArticle(array('id' => $id, 'locale' => $locale)));
     }
     /**
-     * @Route("/article/{slug}", defaults={"slug" = "Witamy"}, name="_getArticleBySlug")
+     * @Route("{locale}/article/{slug}", defaults={"slug" = "Witamy"}, name="_getArticleBySlug")
      */
     public function getArticleBySlugAction($slug)
     {
@@ -29,24 +29,21 @@ class ArticleController extends Controller
      * @param $tag
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/article/tag/{tag}", name="_listArticlesByTag")
+     * @Route("{locale}/article/tag/{tag}", name="_listArticlesByTag")
      */
 
-    public function listArticlesByTagAction($tag)
+    public function listArticlesByTagAction($tag,$locale)
     {
-        return $this->render('AppBundle:Article:list_articles.html.twig', $this->listArticlesByTag($tag));
+        return $this->render('AppBundle:Article:list_articles.html.twig', $this->listArticlesByTag($tag,$locale));
     }
 
     /**
      * @param $tag
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/article/tag/{tag}", name="_listArticlesByTag")
+     * @Route("{locale}/article/new", name="_addArticle")
      */
 
-    public function addArticleAction(){
-
-    }
 
 /////// Private misc functions
 
@@ -54,7 +51,7 @@ class ArticleController extends Controller
      * @param $tag
      * @return array
      */
-    private function listArticlesByTag($tag)
+    private function listArticlesByTag($tag,$locale)
     {
         $repo = $this->getDoctrine()->getRepository('AppBundle:Tag');
         $data = $repo->findByName($tag);
@@ -71,7 +68,7 @@ class ArticleController extends Controller
         }
         return array(
             'key' => $tag,
-            'locale' => 'pl',
+            'locale' => $locale,
             'description' => null,
             'author' => null,
             'list' => $artArr,
@@ -109,7 +106,7 @@ class ArticleController extends Controller
 
         return array(
             'title' => $article->getTitle(),
-            'locale' => 'pl',
+            'locale' => $article->getLocale(),
             'tags' => $tags,
             'description' => $article->getDescription(),
             'content' => $article->getContent(),

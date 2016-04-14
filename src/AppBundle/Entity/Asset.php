@@ -412,4 +412,98 @@ class Asset
 
         return $this;
     }
+    /**
+     * @var \AppBundle\Entity\Locale
+     */
+    private $locale;
+
+
+    /**
+     * Set locale
+     *
+     * @param \AppBundle\Entity\Locale $locale
+     * @return Asset
+     */
+    public function setLocale(\AppBundle\Entity\Locale $locale = null)
+    {
+        $this->locale = $locale;
+
+        return $this;
+    }
+
+    /**
+     * Get locale
+     *
+     * @return \AppBundle\Entity\Locale 
+     */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $translations;
+
+    /**
+     * @var \AppBundle\Entity\Asset
+     */
+    private $original;
+
+
+    /**
+     * Add translations
+     *
+     * @param \AppBundle\Entity\Asset $translations
+     * @return Asset
+     */
+    public function addTranslation(\AppBundle\Entity\Asset $translations)
+    {
+        $this->translations[] = $translations;
+
+        return $this;
+    }
+
+    /**
+     * Remove translations
+     *
+     * @param \AppBundle\Entity\Asset $translations
+     */
+    public function removeTranslation(\AppBundle\Entity\Asset $translations)
+    {
+        $this->translations->removeElement($translations);
+    }
+
+    /**
+     * Get translations
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTranslations()
+    {
+        return $this->translations;
+    }
+
+    /**
+     * Set original
+     *
+     * @param \AppBundle\Entity\Asset $original
+     * @return Asset
+     */
+    public function setOriginal(\AppBundle\Entity\Asset $original = null)
+    {
+        $this->original = $original;
+
+        return $this;
+    }
+
+    /**
+     * Get original
+     *
+     * @return \AppBundle\Entity\Asset 
+     */
+    public function getOriginal()
+    {
+        return $this->original;
+    }
 }

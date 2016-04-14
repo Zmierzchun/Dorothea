@@ -19,15 +19,16 @@ AppBundle\Entity\Asset:
             type: string
             length: 255
         slug:
-                            type: string
-                            length: 255
-                            unique: true
-                            gedmo:
-                                slug:
-                                    separator: -
-                                    style: lower
-                                    fields:
-                                      - title
+            type: string
+            length: 255
+            unique: true
+            gedmo:
+                slug:
+                  separator: -
+                  style: lower
+                  fields:
+                      - title
+
         enabled:
             type: boolean
         created:
@@ -56,6 +57,9 @@ AppBundle\Entity\Asset:
         children:
             targetEntity: Asset
             mappedBy: parent
+        translations:
+            targetEntity: AppBundle\Entity\Asset
+            mappedBy: original
 
 
     manyToOne:
@@ -66,9 +70,20 @@ AppBundle\Entity\Asset:
             targetEntity: ContentType
             inversedBy: assets
             joinColumn:
-                name: contentType_id
+                name: contentType
                 referencedColumnName: id
-            nullable: false
+                nullable: false
+        original:
+            targetEntity: AppBundle\Entity\Asset
+            inversedBy: translations
+        locale:
+            targetEntity: AppBundle\Entity\Locale
+            inversedBy: assets
+            joinColumn:
+                name: locale
+                referencedColumnName: id
+                nullable: false
+
     manyToMany:
         tags:
             targetEntity: Tag

@@ -173,4 +173,27 @@ class Tag
     {
         return $this->assets;
     }
+
+    /**
+     * Set locale
+     *
+     * @param \AppBundle\Entity\Locale $locale
+     * @return Tag
+     */
+    public function setLocale(\AppBundle\Entity\Locale $locale)
+    {
+        $this->locale = $locale;
+
+        return $this;
+    }
+
+    /**
+     * Get locale
+     *
+     * @return \AppBundle\Entity\Locale 
+     */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
 }

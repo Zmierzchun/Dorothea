@@ -31,6 +31,14 @@ AppBundle\Entity\Tag:
         assets:
             targetEntity: Asset
             mappedBy: tags
+    manyToOne:
+        locale:
+            targetEntity: AppBundle\Entity\Locale
+            inversedBy: tags
+            joinColumn:
+                name: locale
+                referencedColumnName: id
+                nullable: false
 #indexes
     indexes:
         search_idx:

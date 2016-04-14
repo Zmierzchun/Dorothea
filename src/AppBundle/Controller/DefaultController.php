@@ -14,7 +14,7 @@ class DefaultController extends Controller
     public function indexAction()
     {
         // replace this example code with whatever you need
-        return $this->render('default\index.html.twig', array(
+        return $this->render('indexfrontend.html.twig', array(
             'title' => 'Dorothea Testing',
             'locale' => 'pl',
             'tags' => null,

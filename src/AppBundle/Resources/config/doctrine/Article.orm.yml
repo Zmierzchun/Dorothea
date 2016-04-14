@@ -2,9 +2,6 @@ AppBundle\Entity\Article:
     type: entity
     table: null
     repositoryClass: AppBundle\Repository\ArticleRepository
-    gedmo:
-        translation:
-            locale: locale
     id:
         id:
             type: integer
@@ -16,23 +13,19 @@ AppBundle\Entity\Article:
             type: string
             length: 255
             nullable: false
-            gedmo:
-                - translatable
+
         description:
             type: text
             nullable: false
-            gedmo:
-                - translatable
+
         content:
             type: text
             nullable: false
-            gedmo:
-                - translatable
 
         enabled:
             type: boolean
             nullable: false
-            default: "false"
+            default: false
 
         slug:
             type: string
@@ -44,16 +37,19 @@ AppBundle\Entity\Article:
                     style: lower
                     fields:
                       - title
+
         created:
             type: datetime
             gedmo:
                 timestampable:
                     on: create
+
         modified:
             type: datetime
             gedmo:
                 timestampable:
                     on: update
+
         published:
             type: datetime
             gedmo:
@@ -61,28 +57,55 @@ AppBundle\Entity\Article:
                     on: update
                     field:
                         - enabled
+
+
     indexes:
         search_idx:
             columns: slug
+
+
     oneToMany:
         children:
-            targetEntity: Article
+            targetEntity: AppBundle\Entity\Article
             mappedBy: parent
 
+        translations:
+            targetEntity: AppBundle\Entity\Article
+            mappedBy: original
+
+
     manyToOne:
+
         parent:
-            targetEntity: Article
+            targetEntity: AppBundle\Entity\Article
             inversedBy: children
+
+        original:
+            targetEntity: AppBundle\Entity\Article
+            inversedBy: translations
+
         contentType:
-            targetEntity: ContentType
+            nullable: false
+            targetEntity: AppBundle\Entity\ContentType
             inversedBy: articles
             joinColumn:
-                name: contentType_id
+                name: contentType
                 referencedColumnName: id
-            nullable: false
+                nullable: false
+
+        locale:
+            targetEntity: AppBundle\Entity\Locale
+            inversedBy: articles
+            joinColumn:
+                name: locale
+                referencedColumnName: id
+                nullable: false
+
+
+
     manyToMany:
         tags:
-            targetEntity: Tag
+            targetEntity: AppBundle\Entity\Tag
             inversedBy: articles
 
     lifecycleCallbacks: {  }

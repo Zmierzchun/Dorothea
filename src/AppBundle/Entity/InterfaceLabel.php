@@ -5,9 +5,9 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Menu
+ * InterfaceLabel
  */
-class Menu
+class InterfaceLabel
 {
     /**
      * @var int
@@ -15,9 +15,14 @@ class Menu
     private $id;
 
     /**
-     * @var int
+     * @var string
      */
     private $name;
+
+    /**
+     * @var string
+     */
+    private $content;
 
 
     /**
@@ -33,8 +38,8 @@ class Menu
     /**
      * Set name
      *
-     * @param integer $name
-     * @return Menu
+     * @param string $name
+     * @return InterfaceLabel
      */
     public function setName($name)
     {
@@ -46,61 +51,34 @@ class Menu
     /**
      * Get name
      *
-     * @return string
+     * @return string 
      */
     public function getName()
     {
         return $this->name;
     }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $items;
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->items = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    public function __toString()
-    {
-        return $this->getName();
-    }
-
-    /**
-     * Add items
+     * Set content
      *
-     * @param \AppBundle\Entity\MenuItem $items
-     * @return Menu
+     * @param string $content
+     * @return InterfaceLabel
      */
-    public function addItem(\AppBundle\Entity\MenuItem $items)
+    public function setContent($content)
     {
-        $this->items[] = $items;
+        $this->content = $content;
 
         return $this;
     }
 
     /**
-     * Remove items
+     * Get content
      *
-     * @param \AppBundle\Entity\MenuItem $items
+     * @return string 
      */
-    public function removeItem(\AppBundle\Entity\MenuItem $items)
+    public function getContent()
     {
-        $this->items->removeElement($items);
-    }
-
-    /**
-     * Get items
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getItems()
-    {
-        return $this->items;
+        return $this->content;
     }
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -108,7 +86,7 @@ class Menu
     private $translations;
 
     /**
-     * @var \AppBundle\Entity\Menu
+     * @var \AppBundle\Entity\MenuItem
      */
     private $original;
 
@@ -117,14 +95,25 @@ class Menu
      */
     private $locale;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->translations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    public function __toString()
+    {
+        return $this->getName();
+    }
 
     /**
      * Add translations
      *
-     * @param \AppBundle\Entity\Menu $translations
-     * @return Menu
+     * @param \AppBundle\Entity\InterfaceLabel $translations
+     * @return InterfaceLabel
      */
-    public function addTranslation(\AppBundle\Entity\Menu $translations)
+    public function addTranslation(\AppBundle\Entity\InterfaceLabel $translations)
     {
         $this->translations[] = $translations;
 
@@ -134,9 +123,9 @@ class Menu
     /**
      * Remove translations
      *
-     * @param \AppBundle\Entity\Menu $translations
+     * @param \AppBundle\Entity\InterfaceLabel $translations
      */
-    public function removeTranslation(\AppBundle\Entity\Menu $translations)
+    public function removeTranslation(\AppBundle\Entity\InterfaceLabel $translations)
     {
         $this->translations->removeElement($translations);
     }
@@ -154,10 +143,10 @@ class Menu
     /**
      * Set original
      *
-     * @param \AppBundle\Entity\Menu $original
-     * @return Menu
+     * @param \AppBundle\Entity\MenuItem $original
+     * @return InterfaceLabel
      */
-    public function setOriginal(\AppBundle\Entity\Menu $original = null)
+    public function setOriginal(\AppBundle\Entity\InterfaceLabel $original = null)
     {
         $this->original = $original;
 
@@ -167,7 +156,7 @@ class Menu
     /**
      * Get original
      *
-     * @return \AppBundle\Entity\Menu 
+     * @return \AppBundle\Entity\MenuItem 
      */
     public function getOriginal()
     {
@@ -178,9 +167,9 @@ class Menu
      * Set locale
      *
      * @param \AppBundle\Entity\Locale $locale
-     * @return Menu
+     * @return InterfaceLabel
      */
-    public function setLocale(\AppBundle\Entity\Locale $locale = null)
+    public function setLocale(\AppBundle\Entity\Locale $locale)
     {
         $this->locale = $locale;
 
