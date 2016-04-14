@@ -1,0 +1,47 @@
+{% extends "default/index.html.twig" %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %}
+    <div class="asset">
+        <h3 class="assetTitle">{{ title }}</h3>
+        {% if contentType == 'link' %}
+            <div class="assetLinkContainer">
+                <p class="assetDescription">{{ description }}</p>
+                <a class="assetLink" href="{{ link }}">Kliknij tutaj, aby przejść...</a>
+            </div>
+        {% elseif contentType == 'image'%}
+            <div class="assetImgContainer">
+                <img class="assetImg" src="{{ link }}" alt="{{ title }}" />
+                <p class="assetDescription">{{ description }}</p>
+            </div>
+        {% elseif contentType == 'video' or contentType == 'audio'%}
+            <div class="assetAVContainer">
+                <iframe width="640" height="320" src="{{ link }}" frameborder="0" allowfullscreen></iframe>
+                <p class="assetDescription">{{ description }}</p>
+            </div>
+        {% else %}
+
+            {% endif %}
+        <p class="assetModification">Data ostatniej aktualizacji: {{ modified|date('Y-m-d')}}</p>
+        <ul class="assetTags"> Tagi
+            {% if tags %}
+                {% for tag in tags %}
+                    <li><a class="tagLink" href="{{  path('_listAssetsByTag', {'tag': tag.name, 'contentType': 'any'}) }}">{{ tag.name }}</a></li>
+                {% endfor %}
+            {% else %}
+                <li class="noTags" lang="pl">Nie przypisano żadnych tagów.</li>
+            {% endif %}
+        </ul>
+        <ul class="relatedAssets"> Powiązane media
+            {% if children %}
+                {% for child in children %}
+                    <li><a class="childLink" href="{{ path('_getAssetBySlug', {'slug': child.slug }) }}">{{ child.title }}</a></li>
+                {% endfor %}
+            {% else %}
+                <li class="noChildren" lang="pl">Nie ma powiązanych mediów</li>
+            {% endif %}
+        </ul>
+    </div>
+
+{% endblock %}

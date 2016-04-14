@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Article;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
@@ -34,6 +36,19 @@ class ArticleController extends Controller
     {
         return $this->render('AppBundle:Article:list_articles.html.twig', $this->listArticlesByTag($tag));
     }
+
+    /**
+     * @param $tag
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @Route("/article/tag/{tag}", name="_listArticlesByTag")
+     */
+
+    public function addArticleAction(){
+
+    }
+
+/////// Private misc functions
 
     /**
      * @param $tag
@@ -91,6 +106,7 @@ class ArticleController extends Controller
         if (!isset($children)){
             $children = null;
         }
+
         return array(
             'title' => $article->getTitle(),
             'locale' => 'pl',
@@ -101,7 +117,6 @@ class ArticleController extends Controller
             'children' => $children,
             'author' => null,
         );
-
     }
 
 }

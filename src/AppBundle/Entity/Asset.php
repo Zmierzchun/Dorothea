@@ -371,4 +371,45 @@ class Asset
     {
         return $this->published;
     }
+    /**
+     * @var string
+     */
+    private $slug;
+
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Asset
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set contentType
+     *
+     * @param \AppBundle\Entity\ContentType $contentType
+     * @return Asset
+     */
+    public function setContentType(\AppBundle\Entity\ContentType $contentType = null)
+    {
+        $this->contentType = $contentType;
+
+        return $this;
+    }
 }

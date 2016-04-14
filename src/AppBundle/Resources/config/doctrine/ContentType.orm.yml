@@ -14,16 +14,14 @@ AppBundle\Entity\ContentType:
             length: '64'
             unique: true
     manyToOne:
-        articles:
-            targetEntity: Article
-            inversedBy: contentType
-            joinColumn:
-                name: contentType_id
-                referencedColumnName: id
+
+
+    oneToMany:
         assets:
             targetEntity: Asset
-            inversedBy: contentType
-            joinColumn:
-                name: contentType_id
-                referencedColumnName: id
+            mappedBy: contentType
+        articles:
+            targetEntity: Article
+            mappedBy: contentType
+
     lifecycleCallbacks: {  }

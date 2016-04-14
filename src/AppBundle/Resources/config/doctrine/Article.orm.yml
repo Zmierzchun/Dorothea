@@ -40,8 +40,8 @@ AppBundle\Entity\Article:
             unique: true
             gedmo:
                 slug:
-                    separator: _
-                    style: camel
+                    separator: -
+                    style: lower
                     fields:
                       - title
         created:
@@ -68,13 +68,18 @@ AppBundle\Entity\Article:
         children:
             targetEntity: Article
             mappedBy: parent
-        contentType:
-            targetEntity: ContentType
-            mappedBy: articles
+
     manyToOne:
         parent:
             targetEntity: Article
             inversedBy: children
+        contentType:
+            targetEntity: ContentType
+            inversedBy: articles
+            joinColumn:
+                name: contentType_id
+                referencedColumnName: id
+            nullable: false
     manyToMany:
         tags:
             targetEntity: Tag

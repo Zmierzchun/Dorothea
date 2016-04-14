@@ -409,4 +409,17 @@ class Article
     {
         return $this->published;
     }
+
+    /**
+     * Set contentType
+     *
+     * @param \AppBundle\Entity\ContentType $contentType
+     * @return Article
+     */
+    public function setContentType(\AppBundle\Entity\ContentType $contentType = null)
+    {
+        $this->contentType = $contentType;
+
+        return $this;
+    }
 }

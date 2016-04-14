@@ -1,0 +1,14 @@
+{% extends "default/index.html.twig" %}
+
+{% block title %} {{ key }} {% endblock %}
+
+{% block content %}
+    {% for asset in list %}
+        <div class="articleList">
+            <h3 class="articleListTitle">
+                <a href="{{ path('_getAssetBySlug', {'slug': asset.slug}) }}">{{ asset.title }}</a>
+            </h3>
+        </div>
+    {% endfor %}
+
+{% endblock %}

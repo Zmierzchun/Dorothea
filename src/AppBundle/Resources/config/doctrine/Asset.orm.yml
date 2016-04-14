@@ -18,6 +18,16 @@ AppBundle\Entity\Asset:
         link:
             type: string
             length: 255
+        slug:
+                            type: string
+                            length: 255
+                            unique: true
+                            gedmo:
+                                slug:
+                                    separator: -
+                                    style: lower
+                                    fields:
+                                      - title
         enabled:
             type: boolean
         created:
@@ -46,13 +56,19 @@ AppBundle\Entity\Asset:
         children:
             targetEntity: Asset
             mappedBy: parent
-        contentType:
-            targetEntity: ContentType
-            mappedBy: assets
+
+
     manyToOne:
         parent:
             targetEntity: Asset
             inversedBy: children
+        contentType:
+            targetEntity: ContentType
+            inversedBy: assets
+            joinColumn:
+                name: contentType_id
+                referencedColumnName: id
+            nullable: false
     manyToMany:
         tags:
             targetEntity: Tag
